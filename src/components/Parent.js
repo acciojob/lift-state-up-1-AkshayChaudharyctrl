@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 class Parent extends React.Component {
   constructor(props) {
@@ -7,37 +7,31 @@ class Parent extends React.Component {
     this.state = {
       showModal: false
     };
-    this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleButtonClick() {
+  handleClick() {
     this.setState({ showModal: true });
   }
 
   render() {
     return (
       <div className="parent">
-        <Child
-          showModal={this.state.showModal}
-          handleButtonClick={this.handleButtonClick}
-        />
+        <h1>Parent Component</h1>
+        {this.state.showModal && <h3>Modal Content</h3>}
+        <Child handleClick={this.handleClick} />
       </div>
     );
   }
 }
 
-const Child = ({ showModal, handleButtonClick }) => {
+const Child = (props) => {
   return (
     <div>
-      <button onClick={handleButtonClick}>Show Modal</button>
-      {showModal && <Modal />}
+      <h2>Child Component</h2>
+      <button onClick={props.handleClick}>Show Modal</button>
     </div>
   );
 };
 
-const Modal = () => {
-  return <div className="modal">Modal Content</div>;
-};
-
 export default Parent;
-
